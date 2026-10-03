@@ -84,9 +84,9 @@ For example:
 The Fleet Manager doesn't replace your AKS clusters.
 It helps you coordinate them.
 
-```
-```text
-3. Why would a company need it?
+
+
+3. # Why would a company need it?
 Suppose you have:
 Cluster 1 → US
 Cluster 2 → Europe
@@ -99,11 +99,10 @@ Instead of thinking:
 Deploy to cluster 1
 Deploy to cluster 2
 Deploy to cluster 3
-...
 
-```text
+
 Fleet Manager gives you a multi-cluster management model.
-4. One important use: multi-cluster application deployment
+4. # One important use: multi-cluster application deployment
 Imagine you have:
 bookstore:v2.0
 
@@ -122,9 +121,7 @@ Conceptually:
        AKS-US   AKS-Europe   AKS-India
 
 This is particularly useful for organizations running multiple production clusters.
-```
 
-```text
 
 5. Another important use: Kubernetes resource placement
 Suppose you have:
