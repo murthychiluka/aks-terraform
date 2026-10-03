@@ -271,3 +271,76 @@ Many AKS clusters
 And the key idea is:
 Fleet Manager doesn't create one giant Kubernetes cluster. It coordinates multiple independent AKS clusters.
 ```
+
+what I understood about azure arc is that  it also manages clusters which are on-prem or other cloud vendor cluster or azure aks, is that right?
+
+Yes — your understanding is correct. 👍
+
+The easiest way to think about Azure Arc is:
+
+    Azure Arc extends Azure management capabilities to resources running outside Azure.
+
+For Kubernetes, that means you can connect and manage Kubernetes clusters running in different environments.
+                         Azure
+                           |
+                     Azure Arc
+                           |
+        +------------------+------------------+
+        |                  |                  |
+       AKS              On-Prem           Other Cloud
+     (Azure)          Kubernetes          Kubernetes
+                         |                  |
+                    VMware/Bare          AWS EKS
+                    Metal/etc.           GKE, etc.
+For example
+
+You could have:
+Azure
+ └── AKS Cluster
+
+On-Premises
+ └── Kubernetes Cluster
+
+AWS
+ └── EKS Cluster
+
+GCP
+ └── GKE Cluster
+
+You can connect the Kubernetes clusters to Azure Arc and then use Azure-based management capabilities for them.
+What can Arc help with?
+
+Depending on the configuration, you can use Azure services/capabilities for things such as:
+
+    Inventory and visibility of Kubernetes clusters
+    Azure Policy and governance
+    GitOps-based configuration/deployment
+    Monitoring/observability through Azure services
+    Security management
+    RBAC and Azure management integration
+
+Important distinction
+
+This is where Fleet Manager vs Azure Arc becomes clearer:
+Azure Arc
+   ↓
+Connect/manage Kubernetes
+across different environments
+   ↓
+Azure + On-Prem + AWS + GCP
+
+Whereas:
+AKS Fleet Manager
+   ↓
+Coordinate/manage
+multiple AKS clusters
+   ↓
+AKS-1 + AKS-2 + AKS-3 + ...
+
+So your mental model can be:
+
+Azure Arc = hybrid/multicloud Kubernetes management
+
+AKS Fleet Manager = multiple AKS clusters managed as a fleet
+
+One small clarification: Azure Arc doesn't magically turn an AWS/GCP/on-prem cluster into an AKS cluster. The cluster remains EKS, GKE, or your on-prem Kubernetes cluster; Arc connects it to Azure management capabilities.
