@@ -111,7 +111,7 @@ resource "azurerm_linux_virtual_machine" "aks_admin" {
   size                = "Standard_D2s_v3"
 
   admin_username = "azureuser"
-  admin_password = "Akshaj@87777"
+  admin_password = "Aadvik@143143"
 
   disable_password_authentication = false
 
