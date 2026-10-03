@@ -1,46 +1,47 @@
 terraform {
-  required_version = ">=1.5.0"
+  required_version = ">= 1.5.0"
 
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~>4.0"
+      version = "~> 4.0"
     }
   }
 }
 
 provider "azurerm" {
   features {}
-  subscription_id = "f8a78965-9fe1-42ff-8ded-b977deb6fbdd"
+
+  subscription_id = "9734ed68-621d-47ed-babd-269110dbacb1"
+  resource_provider_registrations = "none"
 }
 
-
-resource "azurerm_resource_group" "aks_rg" {
-  name     = "aks-rg"
-  location = "Central India"
+# Existing Resource Group
+data "azurerm_resource_group" "aks_rg" {
+  name = "1-5e85855c-playground-sandbox"
 }
 
-
-
+# Virtual Network
 resource "azurerm_virtual_network" "vnet" {
   name                = "aks-vnet"
-  location            = azurerm_resource_group.aks_rg.location
-  resource_group_name = azurerm_resource_group.aks_rg.name
+  location            = data.azurerm_resource_group.aks_rg.location
+  resource_group_name = data.azurerm_resource_group.aks_rg.name
   address_space       = ["10.0.0.0/16"]
 }
 
+# Subnet
 resource "azurerm_subnet" "aks_subnet" {
   name                 = "aks-subnet"
-  resource_group_name  = azurerm_resource_group.aks_rg.name
+  resource_group_name  = data.azurerm_resource_group.aks_rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-
+# AKS Cluster
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "demo-aks"
-  location            = azurerm_resource_group.aks_rg.location
-  resource_group_name = azurerm_resource_group.aks_rg.name
+  location            = data.azurerm_resource_group.aks_rg.location
+  resource_group_name = data.azurerm_resource_group.aks_rg.name
   dns_prefix          = "demoaks"
 
   default_node_pool {
