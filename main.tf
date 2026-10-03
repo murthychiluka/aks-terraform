@@ -18,7 +18,7 @@ provider "azurerm" {
 
 # Existing Resource Group
 data "azurerm_resource_group" "aks_rg" {
-  name = "1-5e85855c-playground-sandbox"
+  name = "1-fcdbd8dd-playground-sandbox"
 }
 
 # Virtual Network
