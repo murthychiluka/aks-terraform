@@ -14,13 +14,13 @@ terraform plan
 terraform apply
 ```
 
-# In sidte the Eks client server procress
-- connect to eks clinent server 
+# Inside the EKS client server process
+- connect to the eks client server 
 
-## run the below comnds
+## run the below commands
 
 ```bash
-# Login to Azure
+# Log in to Azure
 az login --use-device-code
 ```
 # Get AKS credentials
