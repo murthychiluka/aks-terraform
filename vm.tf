@@ -1,16 +1,16 @@
 resource "azurerm_public_ip" "vm_pip" {
   name                = "aks-admin-pip"
-  location            = azurerm_resource_group.aks_rg.location
-  resource_group_name = azurerm_resource_group.aks_rg.name
+  location            = data.azurerm_resource_group.aks_rg.location
+  resource_group_name = data.azurerm_resource_group.aks_rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
 }
 
 resource "azurerm_network_security_group" "vm_nsg" {
   name                = "aks-admin-nsg"
-  location            = azurerm_resource_group.aks_rg.location
-  resource_group_name = azurerm_resource_group.aks_rg.name
-
+  location            = data.azurerm_resource_group.aks_rg.location
+  resource_group_name = data.azurerm_resource_group.aks_rg.name
+  
   security_rule {
     name                       = "Allow-SSH"
     priority                   = 100
@@ -87,8 +87,8 @@ resource "azurerm_network_security_group" "vm_nsg" {
 
 resource "azurerm_network_interface" "vm_nic" {
   name                = "aks-admin-nic"
-  location            = azurerm_resource_group.aks_rg.location
-  resource_group_name = azurerm_resource_group.aks_rg.name
+  location            = data.azurerm_resource_group.aks_rg.location
+  resource_group_name = data.azurerm_resource_group.aks_rg.name
 
   ip_configuration {
     name                          = "internal"
@@ -106,8 +106,8 @@ resource "azurerm_network_interface_security_group_association" "vm_nsg_associat
 
 resource "azurerm_linux_virtual_machine" "aks_admin" {
   name                = "aks-admin-vm"
-  location            = azurerm_resource_group.aks_rg.location
-  resource_group_name = azurerm_resource_group.aks_rg.name
+  location            = data.azurerm_resource_group.aks_rg.location
+  resource_group_name = data.azurerm_resource_group.aks_rg.name
   size                = "Standard_D2s_v3"
 
   admin_username = "azureuser"
@@ -155,4 +155,3 @@ EOF
     version   = "latest"
   }
 }
-
