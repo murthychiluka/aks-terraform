@@ -50,40 +50,63 @@ now crete one deplyment and access it
 
 ## Kubernetes Fleet Manager 
 
-Think of AKS Fleet Manager as a central control point for multiple AKS clusters.
-The problem Fleet Manager solves
-Imagine your company has:
-                 Azure
-                   |
-        +----------+----------+
-        |          |          |
-      AKS-Dev   AKS-Prod   AKS-DR
-       Cluster    Cluster    Cluster
+# Azure Kubernetes Service (AKS) Fleet Manager
+
+## 1. What is AKS Fleet Manager?
+
+Think of **AKS Fleet Manager** as a central control point for managing multiple AKS clusters.
+
+### The problem Fleet Manager solves
+
+Imagine your company has multiple AKS clusters:
+
+```text
+                    Azure
+                      |
+          +-----------+-----------+
+          |           |           |
+        AKS-Dev    AKS-Prod    AKS-DR
+        Cluster     Cluster    Cluster
+```
 
 Without Fleet Manager, you manage each cluster separately:
+
+```text
 kubectl → AKS-Dev
 kubectl → AKS-Prod
 kubectl → AKS-DR
+```
 
+If you have 10, 20, or 50 AKS clusters, managing them individually becomes difficult.
 
-you have 10, 20, or 50 AKS clusters, this becomes difficult.
-Fleet Manager provides a centralized way to organize and manage a group of AKS clusters.
-2. Simple definition
-AKS Fleet Manager = a management layer for multiple AKS clusters.
+**AKS Fleet Manager provides a centralized way to organize and manage a group of AKS clusters.**
 
-The individual AKS clusters are called member clusters.
+## 2. Simple Definition
+
+**AKS Fleet Manager = A management layer for multiple AKS clusters.**
+
+The individual AKS clusters connected to Fleet Manager are called **Member Clusters**.
+
 For example:
-              AKS Fleet Manager
-                     |
-        +------------+------------+
-        |            |            |
-      AKS-Dev     AKS-Prod      AKS-DR
-     Member       Member        Member
-     Cluster      Cluster       Cluster
 
-The Fleet Manager doesn't replace your AKS clusters.
-It helps you coordinate them.
+```text
+                  AKS Fleet Manager
+                         |
+             +-----------+-----------+
+             |           |           |
+          AKS-Dev     AKS-Prod     AKS-DR
+          Member       Member      Member
+          Cluster      Cluster     Cluster
+```
 
+### Important Points
+
+- The Fleet Manager does not replace your existing AKS clusters.
+- Individual AKS clusters continue to operate independently.
+- Fleet Manager helps you coordinate and manage multiple clusters.
+- It provides a centralized management approach for multi-cluster Kubernetes environments.
+
+**Key takeaway:** Think of AKS Fleet Manager as a central management layer that helps you manage multiple Kubernetes clusters instead of managing each cluster independently.
 
 
 3. # Why would a company need it?
@@ -113,12 +136,15 @@ AKS-India
 
 Fleet Manager can help coordinate deployment across those member clusters.
 Conceptually:
+
+```text
                  Fleet
                   |
              bookstore:v2
              /      |      \
             /       |       \
        AKS-US   AKS-Europe   AKS-India
+```
 
 This is particularly useful for organizations running multiple production clusters.
 
