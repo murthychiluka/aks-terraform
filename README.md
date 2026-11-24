@@ -159,6 +159,9 @@ region = europe
 
 You can organize/target clusters based on labels and placement policies.
 Conceptually:
+
+```text
+
 Fleet
  |
  +-- AKS-US
@@ -169,6 +172,9 @@ Fleet
  |
  +-- AKS-Dev
        environment=dev
+```
+
+```text
 
 A placement policy could target the production clusters.
              Application
@@ -179,6 +185,8 @@ A placement policy could target the production clusters.
              /          \
             ↓            ↓
        AKS-US        AKS-Europe
+```
+
 ```text
 6. Fleet Manager and GitOps
 This is particularly interesting for your Argo CD / CI/CD learning.
@@ -195,12 +203,14 @@ Fleet
  |
  +------ AKS-3
 
+```
 The fleet can help coordinate what should be deployed to which clusters.
 So instead of managing every cluster independently, you establish a central multi-cluster deployment model.
 
-```
+
 
 ```text
+
 7. Fleet Manager vs AKS
 Don't confuse these:
 AKS
@@ -213,6 +223,7 @@ AKS
  +-- Nodes
 
 ```
+
 ```text
 Fleet Manager
 Helps manage multiple AKS clusters together.
@@ -257,6 +268,7 @@ AKS + on-prem Kubernetes + other cloud Kubernetes
 ```
 
 ```text
+
 9. Real-world example
 Suppose a company operates an online shopping platform.
 They have:
@@ -268,6 +280,9 @@ They have:
        |             |             |
      AKS           AKS           AKS
 
+```
+
+```text
 They want:
 - same application version across regions
 - centralized multi-cluster deployment
@@ -279,11 +294,16 @@ Fleet Manager helps provide the multi-cluster coordination layer.
 ```
 
 ```text
+
 10. Interview answer
 If an interviewer asks:
 "What is AKS Fleet Manager and why would you use it?"
 You can say:
 AKS Fleet Manager is an Azure service for managing and coordinating multiple AKS clusters as a fleet. Instead of managing each cluster independently, we can group AKS clusters as member clusters and use fleet capabilities for multi-cluster application deployment and resource placement. It is useful for organizations running multiple AKS clusters across regions, environments, or business units.
+
+```
+
+```text
 
 The easiest way to remember
 One AKS cluster
@@ -296,6 +316,7 @@ Many AKS clusters
 
 And the key idea is:
 Fleet Manager doesn't create one giant Kubernetes cluster. It coordinates multiple independent AKS clusters.
+
 ```
 
 what I understood about azure arc is that  it also manages clusters which are on-prem or other cloud vendor cluster or azure aks, is that right?
@@ -307,6 +328,8 @@ The easiest way to think about Azure Arc is:
     Azure Arc extends Azure management capabilities to resources running outside Azure.
 
 For Kubernetes, that means you can connect and manage Kubernetes clusters running in different environments.
+
+```text
                          Azure
                            |
                      Azure Arc
@@ -333,6 +356,8 @@ AWS
 GCP
  └── GKE Cluster
 
+```
+
 You can connect the Kubernetes clusters to Azure Arc and then use Azure-based management capabilities for them.
 What can Arc help with?
 
@@ -345,6 +370,7 @@ Depending on the configuration, you can use Azure services/capabilities for thin
     Security management
     RBAC and Azure management integration
 
+```text
 Important distinction
 
 This is where Fleet Manager vs Azure Arc becomes clearer:
@@ -370,3 +396,5 @@ Azure Arc = hybrid/multicloud Kubernetes management
 AKS Fleet Manager = multiple AKS clusters managed as a fleet
 
 One small clarification: Azure Arc doesn't magically turn an AWS/GCP/on-prem cluster into an AKS cluster. The cluster remains EKS, GKE, or your on-prem Kubernetes cluster; Arc connects it to Azure management capabilities.
+
+```
